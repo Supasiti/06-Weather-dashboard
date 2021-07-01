@@ -15,40 +15,36 @@
     <link rel="stylesheet" type="text/css" href="./assets/css/style.css" />
   </head>
 
+  <!-- body -->
   <body class="min-100-vh flex-column">
     
-    <header class="hero">
-      <h1 class="app-title">Weather Dashboard</h1>
-      <p>Search for a GitHub user or click on a language to see a list of repositories and how many open issues they have!
-      </p>
+    <!-- header -->
+    <header class="hero flex-column align-center">
+      <h1 class="app-title text-center">Weather Dashboard</h1>
     </header>
   
-  
+    <!-- main content-->
     <main class="flex-row justify-space-between">
+
+      <!-- side bar -->
       <div class="col-12 col-md-4">
-  
         <div class="card">
-          <h3 class="card-header text-uppercase">Search By User</h3>
-          <form id="user-form" class="card-body">
-            <label class="form-label" for="username">Username</label>
-            <input name="username" id="username" type="text" autofocus="true" class="form-input" />
-            <button type="submit" class="btn">Get User</button>
+          <h3 class="card-header text-uppercase">Search for a City</h3>
+          <form id="city-form" class="card-body">
+            <input name="city-name" id="city-name" type="text" autofocus="true" class="form-input" />
+            <button type="submit" class="btn">Search</button>
           </form>
         </div>
-  
-        <div class="card">
-          <h3 class="card-header text-uppercase">Search By Topic</h3>
-          <div id="language-buttons" class="card-body">
-            <button data-language="javascript" class="btn">JavaScript</button>
-            <button data-language="html" class="btn">HTML</button>
-            <button data-language="css" class="btn">CSS</button>
-          </div>
+
+        <!-- recent searches -->
+        <div id="recent-searches" class="card">
         </div>
       </div>
   
-      <div class="col-12 col-md-8">
-        <h2 class="subtitle">Showing Repositories for: <span id="repo-search-term"></span></h2>
-        <div id="repos-container" class="list-group"></div>
+      <!-- result deplay here -->
+      <div class="col-12 col-md-8 flex-column align-stretch">
+        <div id="today-container" class=""></div>
+        <div id="days-container" class="list-group"></div>
       </div>
     </main>
 
