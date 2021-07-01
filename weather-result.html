@@ -29,7 +29,7 @@
       <!-- side bar -->
       <div class="col-12 col-md-4">
         <div class="card">
-          <h3 class="card-header text-uppercase">Search for a City</h3>
+          <h3 class="card-header text-uppercase text-center">Search for a City</h3>
           <form id="city-form" class="card-body">
             <input name="city-name" id="city-name" type="text" autofocus="true" placeholder="Melbourne" class="form-input" />
             <button type="submit" class="btn">Search</button>
@@ -37,14 +37,24 @@
         </div>
 
         <!-- recent searches -->
-        <div id="recent-searches" class="card">
+        <div id="recent-searches-container" class="card">
         </div>
       </div>
   
       <!-- result deplay here -->
-      <div class="col-12 col-md-8 flex-column align-stretch">
-        <div id="today-container" class=""></div>
-        <div id="days-container" class="list-group"></div>
+      <div class="col-12 col-md-8">
+        
+        <!-- today weather -->
+        <div id="today-container" class="flex-column align-stretch">
+          <div id="today-title"></div>
+          <div id="today-forecast-container"></div>
+        </div>
+
+        <!-- 5 day forcast -->
+        <div id="days-container" class="flex-column align-stretch">
+          <div id="days-title"></div>
+          <div id="forcast-container" class="flex-row justify-space-between"></div>
+        </div>
       </div>
     </main>
 
