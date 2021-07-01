@@ -4,6 +4,7 @@
   --tertiary: #1d6b7e;
   --light-dark: #2b6472;
   --dark: #355b65;
+  --warning: #ec9696;
   --border-radius: .3rem;
 }
 
@@ -128,10 +129,12 @@ p {
   outline: none;
 }
 
-
-
-
-
+.warning {
+  font-weight: 700;
+  margin: 2px 0px;
+  font-size: 0.9rem;
+  color: var(--warning);
+}
 
 
 /* HEIGHT / WIDTH UTILS */
@@ -151,8 +154,6 @@ p {
 .text-center {
   text-align: center;
 }
-
-
 
 /* FLEX CONTENT */
 .flex-row {
@@ -453,4 +454,13 @@ p {
   .col-xl-12 {
     flex: 0 0 100%;
   }
+}
+
+/* VISIBILITY */
+.visible {
+  visibility: visible;
+}
+
+.hidden {
+  visibility: hidden;
 }

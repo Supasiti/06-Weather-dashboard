@@ -31,7 +31,8 @@
         <div class="card">
           <h3 class="card-header text-uppercase text-center">Search for a City</h3>
           <form id="city-form" class="card-body">
-            <input name="city-name" id="city-name" type="text" autofocus="true" placeholder="Melbourne" class="form-input" />
+            <input name="city-name" id="city-name-input" type="text" autofocus="true" placeholder="Melbourne" class="form-input" />
+            <p class="warning hidden">Hello</p>
             <button type="submit" class="btn">Search</button>
           </form>
         </div>
@@ -43,7 +44,7 @@
   
       <!-- result deplay here -->
       <div class="col-12 col-md-8">
-        
+
         <!-- today weather -->
         <div id="today-container" class="flex-column align-stretch">
           <div id="today-title"></div>
@@ -58,6 +59,6 @@
       </div>
     </main>
 
-    <script src="assets/js/weather-result.js"></script>
+    <script src="./assets/js/weather-result.js"></script>
   </body>
 </html>
