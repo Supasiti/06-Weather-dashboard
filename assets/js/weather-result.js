@@ -132,6 +132,7 @@ function displayForecast(data) {
   console.log(data);
   let todayData = parseCurrentWeather(data);
   let forecastData = parseWeatherForecast(data);
+  console.log(forecastData);
   displayTodayForecast(todayData);
   // displayFutureForecast(data);
 };
@@ -167,8 +168,15 @@ function parseWeatherForecast(data){
   return result;
 };
 
+// parse the data into an object
 function parseDailyForecast(data){
-  return null;
+  let result = {};
+  result.date = data.dt;  // it comes in unix time
+  result.temp = data.temp.day;
+  result.windSpeed = data['wind_speed'];
+  result.icon = data.weather[0].id;
+  result.humidity = data.humidity;
+  return result;
 };
 
 // display the current weather on screen
@@ -199,6 +207,7 @@ function createDataLabelEl(text) {
   return result;
 };
 
+// create the icon / temp element
 function createIconTempEl(iconClass, temp) {
   let result = document.createElement('p');
   let iconEl = document.createElement('span');
@@ -210,6 +219,7 @@ function createIconTempEl(iconClass, temp) {
   return result;
 }
 
+// add background colour to uv tag depending on the index.
 function addUvColor(uvEl, uvIndex){
   if (uvIndex < 2) {
     uvEl.classList.remove('text-dark');
