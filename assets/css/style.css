@@ -137,6 +137,38 @@ p {
 }
 
 
+/* Forecast */
+.light-card {
+  width: 100%;
+  padding: 3%;
+  margin: 5px 0;
+  border-radius: var(--border-radius);
+  background-color: var(--secondary);
+  color: var(--dark);
+  transition: all 0.5s ease-in-out;
+}
+
+.light-card-body {
+  display: block;
+}
+
+.light-card-title {
+  display: block;
+  font-size: 2rem;
+  color: var(--dark);
+}
+
+.light-card-text {
+  font-size: 1.2rem;
+  color: var(--dark);
+}
+
+.light-card-icon {
+  margin: 1rem;
+  font-size: 4rem;
+  color: var(--dark);
+}
+
 /* HEIGHT / WIDTH UTILS */
 .min-100-vh {
   min-height: 100vh;
