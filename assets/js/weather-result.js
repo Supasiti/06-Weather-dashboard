@@ -4,9 +4,9 @@ var cityInputEl = document.querySelector('#city-name-input');
 var weatherAPIbase = 'https://api.openweathermap.org/data/2.5/';
 var coordinatePath = 'weather?q=';
 var forecastPath = 'onecall?';
-var APIkey = '&appid=71b78982268256669dafd58400af0acc';
+var apiKey = '&appid=71b78982268256669dafd58400af0acc';
 
-
+// is called when search button is clicked
 function handleSearchCity(event) {
   event.preventDefault();
   let cityInput = cityInputEl.value.trim();
@@ -19,18 +19,8 @@ function handleSearchCity(event) {
 
   clearWarning(formEl);
   clearInput(formEl);
-
-  getCityCoordinates(cityInput);
-  // console.log(coordinates);
-  // let forecast = getForecast(cityInput);
-  // if (forecast === null) {
-  //   showWarning(formEl, 'This city does not exist. Please check your spelling.');
-  //   return
-  // };
-
-  // renderTodayForecast(forecast);
-  // renderFutureForecast(forecast);
-}
+  getCityForecast(cityInput);
+};
 
 // show a warning to an element
 function showWarning(el, text) {
@@ -38,7 +28,7 @@ function showWarning(el, text) {
   warningEl.textContent = text;
   warningEl.classList.remove('hidden');
   warningEl.classList.add('visible');
-}
+};
 
 // clear a warning in an element
 function clearWarning(el) {
@@ -46,7 +36,7 @@ function clearWarning(el) {
   warningEl.textContent = 'Hello';
   warningEl.classList.remove('visible');
   warningEl.classList.add('hidden');
-}
+};
 
 // clear all inputs in a form
 function clearInput(form) {
@@ -55,18 +45,30 @@ function clearInput(form) {
   }
 };
 
-// return city coordinates
-// catch bad city names here
-function getCityCoordinates(cityInput){
-  let apiUrl = weatherAPIbase + coordinatePath + cityInput + APIkey;
-  let response =  getApi(apiUrl, parseCoordinates, handle404);
-  console.log(response);
+// display Forcast from city name
+function getCityForecast(cityName) {
+  let apiUrl = weatherAPIbase + coordinatePath + cityName + apiKey;
+  getApi(apiUrl, getForecast, handle404);
 };
 
-// return coordinate data 
-function parseCoordinates(data){
-  console.log(data.coord);
-  return data.coord;
+// return response if not ok 
+//  else response data
+function getApi(url, callback, handleError) {
+  fetch(url).then(function (response) {
+    if (response.ok) {
+      response.json().then(callback);
+    } else {
+      handleError(response); 
+    }
+  }).catch((error) => {
+      console.error('Error:', error);
+  });
+};
+
+// get forecast from coord
+function getForecast(data) {
+  let apiUrl = generateOneCallApiUrl(data.coord);
+  getApi(apiUrl, displayForecast, (response) => (console.log(response.status)));
 };
 
 // handle 404 status error
@@ -79,44 +81,29 @@ function handle404(response) {
   return null;
 };
 
-// get forecast from coord
-function getForecast(coord) {
-  let apiUrl = generateOneCallApiUrl(coord);
-  console.log(apiUrl);
-  // let response = getApi(apiUrl, parseData)
-  return null;
-};
 
 // generate apiUrl for onecall
 function generateOneCallApiUrl(coord) {
   let baseUrl = weatherAPIbase + forecastPath;
-  let qString = 'lat=' ;
+  let excludeQuery = '&exclude=minutely,hourly,alerts';
+  let unitQuery = '&units=metric';
+  let qString = 'lat=' + coord.lat + '&lon=' + coord.lon + excludeQuery + unitQuery + apiKey;
+  return baseUrl + qString;
 };
 
-// return response if not ok 
-//  else response data
-function getApi(url, callback, handleError) {
-  fetch(url).then(function (response) {
-    if (response.ok) {
-      return response.json().then(callback);
-    } else {
-      handleError(response); 
-    }
-  }).catch((error) => {
-      console.error('Error:', error);
-  });
-}
 
-function parseData(data) {
+function displayForecast(data) {
   console.log(data);
-  return data
+  displayTodayForecast(data);
+  displayFutureForecast(data);
 };
 
-function renderTodayForecast(forecast){
+function displayTodayForecast(data){
+  let 
 
 };
 
-function renderFutureForecast(forecast) {
+function displayFutureForecast(data) {
 
 };
 
