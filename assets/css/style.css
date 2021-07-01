@@ -37,6 +37,7 @@ h6 {
 main {
   margin: 20px auto;
   width: 94%;
+  max-width: 1200px;
 }
 
 p {
