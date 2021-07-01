@@ -12,12 +12,14 @@ function handleSearchCity(event) {
   } 
 
   clearWarning(formEl);
+  clearInput(formEl);
 
   let forecast = getForcast(cityInput);
   renderTodayForecast(forecast);
   renderFutureForecast(forecast);
 }
 
+// show a warning to an element
 function showWarning(el, text) {
   let warningEl = el.querySelector('.warning')
   warningEl.textContent = text;
@@ -25,12 +27,20 @@ function showWarning(el, text) {
   warningEl.classList.add('visible');
 }
 
+// clear a warning in an element
 function clearWarning(el) {
   let warningEl = el.querySelector('.warning')
   warningEl.textContent = 'Hello';
   warningEl.classList.remove('visible');
   warningEl.classList.add('hidden');
 }
+
+// clear all inputs in a form
+function clearInput(form) {
+  for (el of form.querySelectorAll('input')) {
+    el.value = "";
+  }
+};
 
 function getForcast(cityInput) {
   return null;
