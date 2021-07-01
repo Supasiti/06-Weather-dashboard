@@ -80,7 +80,6 @@ function getApi(url, callback, handleError) {
 
 // get forecast from coord
 function getForecast(data) {
-  console.log(data);
   let apiUrl = generateOneCallApiUrl(data.coord);
   clearForecastOnDisplay();
   displayCityName(data.name);
@@ -122,7 +121,7 @@ function removeAllChildren(el) {
 // display city name
 function displayCityName(name) {
   let titleEl = document.createElement('h2');
-  titleEl.classList.add('light-card-title');
+  titleEl.classList = 'card-large-title text-dark ';
   titleEl.textContent = name;
   todayDivEl.appendChild(titleEl);
   todayDivEl.classList.remove('hidden');
@@ -132,7 +131,7 @@ function displayCityName(name) {
 function displayForecast(data) {
   console.log(data);
   let todayData = parseCurrentWeather(data);
-  console.log(todayData);
+  let forecastData = parseWeatherForecast(data);
   displayTodayForecast(todayData);
   // displayFutureForecast(data);
 };
@@ -158,6 +157,19 @@ function getIconClass(code) {
   }
 };
 
+// extract forecast data for display
+function parseWeatherForecast(data){
+  let result = [];
+  for (item of data.daily.slice(1,6)) {
+    let dailyForecast = parseDailyForecast(item);
+    result.push(dailyForecast);
+  };
+  return result;
+};
+
+function parseDailyForecast(data){
+  return null;
+};
 
 // display the current weather on screen
 function displayTodayForecast(data){
@@ -167,8 +179,7 @@ function displayTodayForecast(data){
   let windEl = createDataLabelEl('Wind Speed: ' + data.windSpeed + ' m/s');
   let humidityEl = createDataLabelEl('Humidity: ' + data.humidity + ' %');
   let uvEl = createDataLabelEl('UV index: ' + data.uv);
-
-  bodyEl.classList = 'light-card-body';
+  addUvColor(uvEl, data.uv);
 
   bodyEl.appendChild(dateEl);
   bodyEl.appendChild(iconEl);
@@ -180,11 +191,10 @@ function displayTodayForecast(data){
 };
 
 
-
-// create date element
+// create data label element
 function createDataLabelEl(text) {
   let result = document.createElement('p');
-  result.classList.add('light-card-text');
+  result.classList = 'card-large-text text-dark';
   result.textContent = text;
   return result;
 };
@@ -193,16 +203,25 @@ function createIconTempEl(iconClass, temp) {
   let result = document.createElement('p');
   let iconEl = document.createElement('span');
   let text = temp + 'C '
-  result.classList.add('light-card-icon');
+  result.classList = 'card-large-icon text-dark';
   iconEl.classList = iconClass;
   result.textContent = text; 
   result.appendChild(iconEl);
   return result;
 }
 
-function createTempIconEl(temperature) {
-  let tempEl = createTempEl(temperature)
-}
+function addUvColor(uvEl, uvIndex){
+  if (uvIndex < 2) {
+    uvEl.classList.remove('text-dark');
+    uvEl.classList.add('uv-card', 'bg-green', 'text-light')
+  } else if (uvIndex <5) {
+    uvEl.classList.add('uv-card', 'bg-yellow')
+  } else {
+    uvEl.classList.remove('text-dark');
+    uvEl.classList.add('uv-card', 'bg-red', 'text-light')
+  };
+};
+
 
 
 function displayFutureForecast(data) {

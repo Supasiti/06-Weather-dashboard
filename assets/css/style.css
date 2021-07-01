@@ -4,7 +4,10 @@
   --tertiary: #1d6b7e;
   --light-dark: #2b6472;
   --dark: #355b65;
-  --warning: #ec9696;
+  --warning: #c77777;
+  --green: green;
+  --yellow: yellow;
+  --red: red;
   --border-radius: .3rem;
 }
 
@@ -41,6 +44,7 @@ main {
 }
 
 p {
+  margin: 0.2rem;
   font-size: 1.2rem;
 }
 
@@ -75,7 +79,6 @@ p {
   color: var(--secondary);
 }
 
-
 .app-title {
   font-size: 3rem;
   background-color: var(--dark);
@@ -83,6 +86,7 @@ p {
   padding: 0 10px;
   display: inline-block;
 }
+
 
 /* CARD */
 .card {
@@ -99,6 +103,43 @@ p {
   padding-bottom: 10px;
   border-bottom: 2px solid var(--secondary);
 }
+
+/* Forecast */
+.card-large {
+  padding: 3%;
+  margin: 5px 0;
+  border-radius: var(--border-radius);
+  transition: all 0.5s ease-in-out;
+}
+
+.card-large-title {
+  display: block;
+  font-size: 2rem;
+  border-bottom: 2px solid var(--tertiary);
+}
+
+.card-large-text {
+  font-size: 1.2rem;
+}
+
+.card-large-icon {
+  margin: 1rem;
+  font-size: 4rem;
+}
+
+.uv-card {
+  padding: 0.3rem;
+  border-radius: var(--border-radius);
+  transition: all 0.5s ease-in-out;
+}
+
+
+.card-small {
+
+}
+
+
+
 
 
 /* FORM */
@@ -138,38 +179,6 @@ p {
 }
 
 
-/* Forecast */
-.light-card {
-  width: 100%;
-  padding: 3%;
-  margin: 5px 0;
-  border-radius: var(--border-radius);
-  background-color: var(--secondary);
-  color: var(--dark);
-  transition: all 0.5s ease-in-out;
-}
-
-.light-card-body {
-  display: block;
-}
-
-.light-card-title {
-  display: block;
-  font-size: 2rem;
-  color: var(--dark);
-}
-
-.light-card-text {
-  font-size: 1.2rem;
-  color: var(--dark);
-}
-
-.light-card-icon {
-  margin: 1rem;
-  font-size: 4rem;
-  color: var(--dark);
-}
-
 /* HEIGHT / WIDTH UTILS */
 .min-100-vh {
   min-height: 100vh;
@@ -187,6 +196,36 @@ p {
 .text-center {
   text-align: center;
 }
+
+.text-light {
+  color: var(--secondary);
+}
+
+.text-dark {
+  color: var(--dark);
+}
+
+/* BACKGROUND UTILS */
+.bg-light {
+  background-color: var(--secondary);
+}
+
+.bg-dark {
+  background-color: var(--dark);
+}
+
+.bg-green {
+  background-color: var(--green);
+}
+
+.bg-yellow {
+  background-color: var(--yellow);
+}
+
+.bg-red {
+  background-color: var(--red);
+}
+
 
 /* FLEX CONTENT */
 .flex-row {
