@@ -40,7 +40,7 @@ h6 {
 main {
   margin: 20px auto;
   width: 94%;
-  max-width: 1200px;
+  max-width: 1440px;
 }
 
 p {
@@ -133,10 +133,31 @@ p {
   transition: all 0.5s ease-in-out;
 }
 
+#forecast-container {
+  margin: 1rem 0px;
+}
+
+.forecast-title {
+  margin-bottom: 0.5rem;
+}
 
 .card-small {
-
+  padding: 0.5rem;
+  margin: 4px 0;
+  border-radius: var(--border-radius);
+  transition: all 0.5s ease-in-out;
 }
+
+.card-small-text {
+  font-size: 1rem;
+}
+
+.card-small-icon {
+  font-size: 2rem;
+}
+
+
+
 
 
 
@@ -485,6 +506,10 @@ p {
 
   .col-xl-2 {
     flex: 0 0 calc(100% * 2 / 12 - 2%);
+  }
+  
+  .col-xl-2-4 {
+    flex: 0 0 calc(100% * 2.4 / 12 - 2%);
   }
 
   .col-xl-3 {

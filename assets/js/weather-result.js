@@ -11,8 +11,8 @@ var apiKey = '&appid=71b78982268256669dafd58400af0acc';
 var iconDict = {
   200 : "fas fa-cloud-showers-heavy",
   300 : "fas fa-cloud-rain",
-  500 : "fas fa-cloud-showers-heavy'",
-  600 : "fas fa-snowflake'",
+  500 : "fas fa-cloud-showers-heavy",
+  600 : "fas fa-snowflake",
   700 : "fas fa-smog",
   800 : "fas fa-sun",
   801 : "fas fa-cloud"
@@ -132,9 +132,8 @@ function displayForecast(data) {
   console.log(data);
   let todayData = parseCurrentWeather(data);
   let forecastData = parseWeatherForecast(data);
-  console.log(forecastData);
   displayTodayForecast(todayData);
-  // displayFutureForecast(data);
+  displayFutureForecast(forecastData);
 };
 
 // extract important info to create today
@@ -174,19 +173,20 @@ function parseDailyForecast(data){
   result.date = data.dt;  // it comes in unix time
   result.temp = data.temp.day;
   result.windSpeed = data['wind_speed'];
-  result.icon = data.weather[0].id;
+  result.icon = getIconClass(data.weather[0].id);
   result.humidity = data.humidity;
   return result;
 };
 
 // display the current weather on screen
 function displayTodayForecast(data){
+  let classList = 'card-large-text text-dark';
   let bodyEl = document.createElement('div');
-  let dateEl = createDataLabelEl(moment().format('Do MMM YYYY'));
-  let iconEl = createIconTempEl(data.icon, data.temp);
-  let windEl = createDataLabelEl('Wind Speed: ' + data.windSpeed + ' m/s');
-  let humidityEl = createDataLabelEl('Humidity: ' + data.humidity + ' %');
-  let uvEl = createDataLabelEl('UV index: ' + data.uv);
+  let dateEl = createDataLabelEl(moment().format('Do MMM YYYY'), classList);
+  let iconEl = createIconTempEl(data.icon, data.temp + 'C ' , 'card-large-icon text-dark');
+  let windEl = createDataLabelEl('Wind Speed: ' + data.windSpeed + ' m/s', classList);
+  let humidityEl = createDataLabelEl('Humidity: ' + data.humidity + ' %', classList);
+  let uvEl = createDataLabelEl('UV index: ' + data.uv, classList);
   addUvColor(uvEl, data.uv);
 
   bodyEl.appendChild(dateEl);
@@ -200,19 +200,19 @@ function displayTodayForecast(data){
 
 
 // create data label element
-function createDataLabelEl(text) {
+function createDataLabelEl(text, classList) {
   let result = document.createElement('p');
-  result.classList = 'card-large-text text-dark';
+  result.classList = classList;
   result.textContent = text;
   return result;
 };
 
 // create the icon / temp element
-function createIconTempEl(iconClass, temp) {
+function createIconTempEl(iconClass, temp, classList) {
   let result = document.createElement('p');
   let iconEl = document.createElement('span');
-  let text = temp + 'C '
-  result.classList = 'card-large-icon text-dark';
+  let text = temp;
+  result.classList = classList;
   iconEl.classList = iconClass;
   result.textContent = text; 
   result.appendChild(iconEl);
@@ -233,10 +233,45 @@ function addUvColor(uvEl, uvIndex){
 };
 
 
-
 function displayFutureForecast(data) {
+  displayForecastTitle();
+  let containerEl = document.createElement('div');
+  containerEl.classList = 'flex-row justify-space-between';
 
+  for (item of data) {
+    let cardEl = createForecastCard(item);
+    containerEl.appendChild(cardEl);
+  };
+  forecastDivEl.appendChild(containerEl);
 };
+
+// create '5-day forcast title'
+function displayForecastTitle(){
+  let titleEl = document.createElement('h3');
+  titleEl.classList = 'forecast-title text-light';
+  titleEl.textContent = '5-Day Forecast'
+  forecastDivEl.appendChild(titleEl);
+}
+
+// create a daily forecast card
+function createForecastCard(data){
+  let classList = 'card-small-text text-light text-center';
+  let result = document.createElement('div');
+  let dateEl = createDataLabelEl(moment(data.date, 'X').format('Do MMM YYYY'), classList);
+  let tempEl = createDataLabelEl(data.temp, 'card-small-icon text-light text-center')
+  let iconEl = createIconTempEl(data.icon, '', 'card-small-icon text-light text-center');
+  let windEl = createDataLabelEl('Wind: ' + data.windSpeed + ' m/s', classList);
+  let humidityEl = createDataLabelEl('Humidity: ' + data.humidity + ' %', classList);
+
+  result.classList = 'card-small bg-dark col-12 col-md-4 col-lg-3 col-xl-2-4 flex-column justify-center';
+  result.appendChild(dateEl);
+  result.appendChild(iconEl);
+  result.appendChild(tempEl);
+  result.appendChild(windEl);
+  result.appendChild(humidityEl);
+
+  return result;
+}
 
 
 
