@@ -49,17 +49,15 @@ p {
 }
 
 .btn {
+  font-family: 'Comfortaa', cursive;
   font-size: 1.3rem;
   text-decoration:none;
   padding: 6px 5px;
   width: 100%;
   display: block;
   margin: 5px 0;
-  border-radius: var(--border-radius);
-  color: var(--secondary);
   border: none;
   outline: none;
-  background-color: var(--light-dark);
   transition: all 0.5s ease-in-out;
 }
 
@@ -67,6 +65,7 @@ p {
   color: var(--secondary);
   background-color: var(--tertiary);
   box-shadow: 0px 0px 2px 2px var(--secondary);
+  cursor: pointer;
 }
 
 .btn-inline {
@@ -87,6 +86,11 @@ p {
   display: inline-block;
 }
 
+/* RECENT SEARCH BUTTON */
+#recent-searches-container {
+  margin: 0.5rem;
+}
+
 
 /* CARD */
 .card {
@@ -99,7 +103,7 @@ p {
 }
 
 .card-body {
-  margin: 2%;
+  margin: 0.5rem;
   padding-bottom: 10px;
   border-bottom: 2px solid var(--secondary);
 }
@@ -227,8 +231,16 @@ p {
 }
 
 /* BACKGROUND UTILS */
+.bg-primary {
+  background-color: var(--primary);
+}
+
 .bg-light {
   background-color: var(--secondary);
+}
+
+.bg-light-dark {
+  background-color: var(--light-dark);
 }
 
 .bg-dark {
@@ -247,6 +259,11 @@ p {
   background-color: var(--red);
 }
 
+
+/* BORDER UTILS */
+.border-round {
+  border-radius: var(--border-radius);
+}
 
 /* FLEX CONTENT */
 .flex-row {

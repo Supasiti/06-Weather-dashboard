@@ -285,6 +285,12 @@ function saveSearch(cityName){
 // display the recent searches
 function displayRecentSearches(){
   removeAllChildren(recentSearchesEl);
+  
+  let titleEl = document.createElement('h3');
+  titleEl.textContent = 'Recent Searches';
+  titleEl.classList = 'card-header text-uppercase text-center'
+  recentSearchesEl.appendChild(titleEl);
+
   for (cityName of recentSearches){
     let btn = createRecentSearchButton(cityName);
     recentSearchesEl.appendChild(btn);
@@ -295,10 +301,20 @@ function displayRecentSearches(){
 // create recent search button
 function createRecentSearchButton(cityName) {
   let result = document.createElement('button');
+  result.classList = 'btn text-light bg-primary border-round';
+  result.setAttribute('data-city-name', cityName);
+  result.textContent = cityName;
+  result.addEventListener('click', handleGetForecast);
   return result;
 };
 
+// handle when the recent search button is clicked
+function handleGetForecast(event) {
+  event.preventDefault();
 
+  let cityName = event.target.getAttribute('data-city-name');
+  getCityForecast(cityName);
+}
 
 // load recent searches from local storage
 function loadRecentSearches(){
@@ -309,11 +325,11 @@ function loadRecentSearches(){
 };
 
 
-
 // initialisation
 function init() {
   loadRecentSearches();
   formEl.addEventListener('submit', handleSearchCity);
+  displayRecentSearches();
 }
 
 init();
