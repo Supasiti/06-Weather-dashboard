@@ -35,7 +35,6 @@ function handleSearchCity(event) {
   clearWarning(formEl);
   clearInput(formEl);
   getCityForecast(cityInput);
-  saveSearch(cityInput);
 };
 
 // show a warning to an element
@@ -84,8 +83,10 @@ function getApi(url, callback, handleError) {
 // get forecast from coord
 function getForecast(data) {
   let apiUrl = generateOneCallApiUrl(data.coord);
+  let cityFullName = data.name + ', ' + data.sys.country;
   clearForecastOnDisplay();
-  displayCityName(data.name + ', ' + data.sys.country);
+  displayCityName(cityFullName);
+  saveSearch(cityFullName);
   getApi(apiUrl, displayForecast, (response) => (console.log(response.status)));
 };
 
