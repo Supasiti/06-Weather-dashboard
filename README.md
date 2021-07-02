@@ -28,6 +28,7 @@ As a result of this work I have learnt and refined the basics for website design
 
 ## <h2 style="text-align:center" id="features">Features</h2>
 [(Back to top)](#table-of-content)
+
 This site has been created keeping accessability standards in mind.
 It includes semantic html elements. These have been constructed in a logical structure. 
 
@@ -35,13 +36,16 @@ It includes semantic html elements. These have been constructed in a logical str
 
 ## <h2 style="text-align:center" id="installation">Installation</h2> 
 [(Back to top)](#table-of-content)
+
 This project can be viewed at [Code Quiz]()
 
 
 ## <h2 style="text-align:center" id="credits"> Credits</h2>
 [(Back to top)](#table-of-content)
+
 Monash University Full Stack Boot Camp on behalf of Trilogy Education - 2021 (Provided Assets)
 
 ## <h2 style="text-align:center">License</h2>
 [(Back to top)](#table-of-content)
+
 [GNU GPLv3](https://choosealicense.com/licenses/gpl-3.0/)
