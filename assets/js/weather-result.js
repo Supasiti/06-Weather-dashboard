@@ -134,7 +134,6 @@ function displayCityName(name) {
 
 // display all forecast
 function displayForecast(data) {
-  console.log(data);
   let todayData = parseCurrentWeather(data);
   let forecastData = parseWeatherForecast(data);
   displayTodayForecast(todayData);
