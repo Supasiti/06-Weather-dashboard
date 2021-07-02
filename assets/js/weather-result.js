@@ -2,11 +2,12 @@ var formEl = document.querySelector('#city-form');
 var cityInputEl = document.querySelector('#city-name-input');
 var todayDivEl = document.querySelector('#today-container');
 var forecastDivEl = document.querySelector('#forecast-container');
+var recentSearchesEl = document.querySelector('#recent-searches-container');
 
 var weatherAPIbase = 'https://api.openweathermap.org/data/2.5/';
 var coordinatePath = 'weather?q=';
 var forecastPath = 'onecall?';
-var apiKey = '&appid=71b78982268256669dafd58400af0acc';
+var apiKey = '&appid=71b78982268256669dafd58400af0acc'; // don't know a better to store it safely
 
 var iconDict = {
   200 : "fas fa-cloud-showers-heavy",
@@ -17,7 +18,7 @@ var iconDict = {
   800 : "fas fa-sun",
   801 : "fas fa-cloud"
 };
-
+var recentSearches = [];
 
 // is called when search button is clicked
 function handleSearchCity(event) {
@@ -33,6 +34,7 @@ function handleSearchCity(event) {
   clearWarning(formEl);
   clearInput(formEl);
   getCityForecast(cityInput);
+  saveSearch(cityInput);
 };
 
 // show a warning to an element
@@ -82,7 +84,7 @@ function getApi(url, callback, handleError) {
 function getForecast(data) {
   let apiUrl = generateOneCallApiUrl(data.coord);
   clearForecastOnDisplay();
-  displayCityName(data.name);
+  displayCityName(data.name + ', ' + data.sys.country);
   getApi(apiUrl, displayForecast, (response) => (console.log(response.status)));
 };
 
@@ -128,6 +130,7 @@ function displayCityName(name) {
   todayDivEl.classList.add('visible');
 }
 
+// display all forecast
 function displayForecast(data) {
   console.log(data);
   let todayData = parseCurrentWeather(data);
@@ -198,7 +201,6 @@ function displayTodayForecast(data){
   todayDivEl.appendChild(bodyEl);
 };
 
-
 // create data label element
 function createDataLabelEl(text, classList) {
   let result = document.createElement('p');
@@ -232,7 +234,7 @@ function addUvColor(uvEl, uvIndex){
   };
 };
 
-
+// display daily forecast
 function displayFutureForecast(data) {
   displayForecastTitle();
   let containerEl = document.createElement('div');
@@ -251,7 +253,7 @@ function displayForecastTitle(){
   titleEl.classList = 'forecast-title text-light';
   titleEl.textContent = '5-Day Forecast'
   forecastDivEl.appendChild(titleEl);
-}
+};
 
 // create a daily forecast card
 function createForecastCard(data){
@@ -271,12 +273,46 @@ function createForecastCard(data){
   result.appendChild(humidityEl);
 
   return result;
-}
+};
+
+// save the search
+function saveSearch(cityName){
+  recentSearches.push(cityName);
+  localStorage.setItem('recentSearches', JSON.stringify(recentSearches));
+  displayRecentSearches();
+};
+
+// display the recent searches
+function displayRecentSearches(){
+  removeAllChildren(recentSearchesEl);
+  for (cityName of recentSearches){
+    let btn = createRecentSearchButton(cityName);
+    recentSearchesEl.appendChild(btn);
+  };
+};
+
+
+// create recent search button
+function createRecentSearchButton(cityName) {
+  let result = document.createElement('button');
+  return result;
+};
 
 
 
+// load recent searches from local storage
+function loadRecentSearches(){
+  let savedSearches = JSON.parse(localStorage.getItem('recentSearches'));
+  if (savedSearches) {
+    recentSearches = savedSearches;
+  }; 
+};
 
+
+
+// initialisation
 function init() {
+  loadRecentSearches();
   formEl.addEventListener('submit', handleSearchCity);
 }
 
