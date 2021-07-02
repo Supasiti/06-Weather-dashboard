@@ -18,6 +18,7 @@ var iconDict = {
   800 : "fas fa-sun",
   801 : "fas fa-cloud"
 };
+const maxRecentSearches = 5; 
 var recentSearches = [];
 
 // is called when search button is clicked
@@ -277,9 +278,22 @@ function createForecastCard(data){
 
 // save the search
 function saveSearch(cityName){
-  recentSearches.push(cityName);
+  updateRecentSearches(cityName);
   localStorage.setItem('recentSearches', JSON.stringify(recentSearches));
   displayRecentSearches();
+};
+
+
+// will update the list of recent searches 
+// - if it is in the list, it moves to first spot
+// - capped to max number
+function updateRecentSearches(cityName){
+  if (recentSearches.includes(cityName)){
+    recentSearches = recentSearches.filter((value) => (value !== cityName));
+  } else if (recentSearches.length === maxRecentSearches){
+    recentSearches.pop();
+  };
+  recentSearches.unshift(cityName);
 };
 
 // display the recent searches
@@ -297,7 +311,6 @@ function displayRecentSearches(){
   };
 };
 
-
 // create recent search button
 function createRecentSearchButton(cityName) {
   let result = document.createElement('button');
@@ -314,6 +327,8 @@ function handleGetForecast(event) {
 
   let cityName = event.target.getAttribute('data-city-name');
   getCityForecast(cityName);
+  updateRecentSearches(cityName);
+  displayRecentSearches();
 }
 
 // load recent searches from local storage
