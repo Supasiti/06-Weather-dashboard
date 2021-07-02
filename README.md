@@ -19,7 +19,7 @@
 ## <h2 style="text-align:center" id="purpose">Propose</h2>
 [(Back to top)](#table-of-content)
 
-In this project, I was tasked to write a weather dashboard as a way to practice making server side API requests. The weather data for cities is accessible throught [OpenWeather One Call API](https://openweathermap.org/api/one-call-api). 
+In this project, I was tasked to write a weather dashboard as a way to practice making server side API requests. The weather data for cities is accessible through [OpenWeather One Call API](https://openweathermap.org/api/one-call-api). 
 
 
 ## <h2 style="text-align:center" id="features">Features</h2>
